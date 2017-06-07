@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+const args = require('./lib/args.js');
+var Git = require('nodegit');
+
+args.validate()
+    .then(args => {
+		return Git.Repository.open(args.path);
+	}).then(repository => {
+		return repository.getBranchCommit('master');
+	}).then(commit => {
+		return commit.message();
+	}).then(message => {
+		console.log(message);
+	}).catch(error => {
+		console.error(error);
+	})
