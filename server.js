@@ -4,7 +4,7 @@ const app = require('./src/app');
 const server = express();
 
 server.use(logger('dev'));
-server.use(express.static(__dirname + '/static'));
+server.use(express.static(__dirname + '/src/static'));
 
 /**
   * GET /

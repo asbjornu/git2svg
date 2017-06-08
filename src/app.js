@@ -26,11 +26,19 @@ module.exports.start = express => {
 			Git.Repository
 				.open(path)
 				.then(repository => {
+					const http = require('http').Server(server);
+					const io = require('socket.io')(http);
+
+					io.on('connection', socket => {
+  						console.log('a user connected');
+					});
+
+					server.locals.io = io;
 					server.locals.path = path;
 					server.locals.repository = repository;
 
 					var port = process.env.PORT || 3000;
-					express.listen(port, () => {
+					http.listen(port, () => {
 						console.log(`Watching '${path}' on http://localhost:${port}`);
 					});
 				});
