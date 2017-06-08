@@ -2,14 +2,18 @@
   "name": "git2svg",
   "version": "0.0.1",
   "description": "git2svg is a Node.js application that displays the graph of a Git repository as an SVG drawing with D3.js",
-  "main": "git2svg",
+  "main": "./src/server.js",
   "dependencies": {
+    "express": "^4.15.3",
+    "morgan": "^1.8.2",
     "nodegit": "^0.18.3",
+    "nodemon": "^1.11.0",
     "yargs": "^8.0.1"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run watch",
+    "watch": "nodemon server -e js"
   },
   "repository": {
     "type": "git",

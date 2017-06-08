@@ -6,7 +6,7 @@ module.exports = {
               .epilog(`Asbjørn Ulsberg © ${new Date().getFullYear()}`)
               .check((arguments, y) => {
                   if (!arguments._ || !Array.isArray(arguments._) || arguments._.length != 1) {
-                      throw 'Error: "path" argument missing';
+                      throw 'Error: "path" argument missing or invalid';
                   }
 
                   return true;
