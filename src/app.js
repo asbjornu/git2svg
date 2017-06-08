@@ -7,6 +7,7 @@
 var server = null;
 const args = require('./args');
 const Git = require('nodegit');
+const path = require('path');
 
 /**
   * Starts the web application.
@@ -49,37 +50,8 @@ module.exports.start = express => {
   */
 module.exports.showIndex = (request, response, next) => {
     try {
-		var repository = server.locals.repository;
-		repository.head().then(reference => {
-			console.log(reference.toString());
-			response.send(reference.toString());
-		})
+		response.sendFile(path.join(__dirname, '/views/index.html'));
     } catch (error) {
-        showError(error, response, next);
+		next(error);
     }
 };
-
-
-/**
-  * Handles the rendering of an error.
-  *
-  * @private
-  * @param request The Express Request object.
-  * @param response The Express Response object.
-  * @param next The Express Next object.
-  * @return void
-  *
-  */
-function showError(error, response, next) {
-    console.error(error);
-
-    try {
-        var model = {
-            error: error
-        };
-        // view.render('error', model, response, next);
-    } catch (e) {
-        console.error(e);
-        next(e);
-    }
-}
