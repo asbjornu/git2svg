@@ -2,11 +2,11 @@ module.exports = {
     validate : function () {
         return new Promise((fulfill, reject) => {
             var yargs = require('yargs')
-              .usage('Usage: $0 [path]')
+              .usage('\nUsage: npm start -- [repository_path]')
               .epilog(`Asbjørn Ulsberg © ${new Date().getFullYear()}`)
               .check((arguments, y) => {
                   if (!arguments._ || !Array.isArray(arguments._) || arguments._.length != 1) {
-                      throw 'Error: "path" argument missing or invalid';
+                      throw 'Error: "repository_path" argument missing or invalid';
                   }
 
                   return true;
