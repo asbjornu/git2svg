@@ -3,19 +3,7 @@
     <head>
         <title>git2svn</title>
 		<script src="/js/socket.io.js"></script>
-		<script>
-			document.addEventListener('DOMContentLoaded', function(event) {
-				var socket = io();
-				var ul = document.getElementById('data');
-
-			    socket.on('data', function(data) {
-					console.log(data);
-					var li = document.createElement('li');
-					li.innerText = data;
-					ul.appendChild(li);
-				});
-			});
-		</script>
+		<script src="/js/git2svg.js"></script>
     </head>
     <body>
         <header>
