@@ -4,8 +4,5 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 	socket.on('data', function(data) {
 		console.log(data);
-		var li = document.createElement('li');
-		li.innerText = data;
-		ul.appendChild(li);
 	});
 });
