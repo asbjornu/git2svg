@@ -8,6 +8,7 @@ var server = null;
 const args = require('./args');
 const Git = require('nodegit');
 const path = require('path');
+const fs = require('fs');
 
 /**
   * Starts the web application.
@@ -31,6 +32,11 @@ module.exports.start = express => {
 
 					io.on('connection', socket => {
   						console.log('a user connected');
+					});
+
+					fs.watch(path, { recursive: true }, (event, filename) => {
+						console.log('Git repository changed.', event, filename);
+						io.emit('data', { event: event, filename: filename });
 					});
 
 					server.locals.io = io;

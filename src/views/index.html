@@ -4,7 +4,17 @@
         <title>git2svn</title>
 		<script src="/js/socket.io.js"></script>
 		<script>
-		  var socket = io();
+			document.addEventListener('DOMContentLoaded', function(event) {
+				var socket = io();
+				var ul = document.getElementById('data');
+
+			    socket.on('data', function(data) {
+					console.log(data);
+					var li = document.createElement('li');
+					li.innerText = data;
+					ul.appendChild(li);
+				});
+			});
 		</script>
     </head>
     <body>
@@ -13,7 +23,8 @@
         </header>
 
         <section class="main-content">
-
+			<ul id="data">
+			</ul>
         </section>
 
         <footer>
