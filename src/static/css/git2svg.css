@@ -12,4 +12,11 @@ body {
 	background: -webkit-radial-gradient(center, ellipse cover, #4c4c4c 0%, #131313 100%);
 	background: radial-gradient(ellipse at center, #4c4c4c 0%, #131313 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=1);
+	background-attachment: fixed;
+}
+
+.commit {
+	r: 19px;
+	fill: #2e75b6;
+	stroke: #004080;
 }

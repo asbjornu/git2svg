@@ -87,31 +87,21 @@ function refresh(event, filename) {
 			committer: committer,
 			message: message,
 			body: body,
-			parents: null,
 			time: time
 		};
 	};
 
-	Git.Reference.list(repository).then(references => {
-		for (var reference of references) {
-			Git.Reference.nameToId(repository, reference).then(oid => {
-				return Git.Commit.lookup(repository, oid);
-			}).then(commit => {
-				var commitData = getCommitData(commit);
+	repository.getHeadCommit().then(headCommit => {
+		var oid = headCommit.id();
+		repository.createRevWalk(oid).walk(oid, (x, c) => {
+			if (!c) {
+				return;
+			}
 
-				Promise
-					.all(commit.parents().map(poid => Git.Commit.lookup(repository, poid)))
-					.then(parents => {
-						commitData.parents = parents.map(getCommitData);
-						server.locals.io.emit('data', {
-							commit: commitData
-						});
-					})
-			}).catch(error => {
-				console.error(error);
-			});
-		}
+			var commit = getCommitData(c);
+			server.locals.io.emit('commit', commit);
+		});
 	}).catch(error => {
 		console.error(error);
-	});
+	})
 }
